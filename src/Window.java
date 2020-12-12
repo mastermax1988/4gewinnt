@@ -35,5 +35,16 @@ public class Window extends Canvas
                 }
                 graphics.fillOval(i * 100 + 50, 500 - j * 100 + 50, 100,  100);
             }
+        graphics.setFont(new Font("Times",10,24));
+        System.out.println(model.getCurrentPlayer());
+        int currentPlayer = (model.getCurrentPlayer() % 2) + 1;
+        graphics.setColor(currentPlayer== 1 ? Color.yellow : Color.red);
+        if(model.getWinner()>0)
+        {
+           graphics.setColor(model.getWinner() == 1 ? Color.yellow : Color.red);
+           graphics.drawString("Player " + model.getWinner() + " won!", 50, 40);
+        }
+        else
+           graphics.drawString("Player " + currentPlayer + ", it's your turn!",50,40);
     }
 }

@@ -5,15 +5,28 @@ public class Controller implements Observer
 {
     private final View view;
     private final Model model;
-    int player;
     @Override
     public void update(Observable observable, Object o)
     {
-        System.out.println("Controller: " + o);
-        if(o==null || (int)o == -1)
+        if(o==null)
             return;
-        if(model.addDisk((int)o,player))
-            player = (player % 2) + 1;
+        DataObject ob = (DataObject) o;
+        if(ob.from.equals("View"))
+        {
+            System.out.println("Controller from view" + ob);
+            if(model.getWinner()>0)
+            {
+                System.exit(0);
+            }
+            if (model.addDisk(ob.value, model.getCurrentPlayer()))
+                model.setCurrentPlayer((model.getCurrentPlayer() % 2) + 1);
+            System.out.println("Controller set player to " + model.getCurrentPlayer());
+        }
+        else if(ob.from.equals("Model"))
+        {
+            model.setWinner(ob.value);
+            view.updateBoard();
+        }
     }
     public Controller(Model m, View v)
     {
@@ -21,6 +34,7 @@ public class Controller implements Observer
         view.addObserver(this);
         model = m;
         m.addObserver(this);
-        player = 1;
+        model.setCurrentPlayer(1);
+        view.updateBoard();
     }
 }

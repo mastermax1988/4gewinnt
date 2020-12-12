@@ -20,7 +20,6 @@ public class View  extends Observable  implements Observer
         myMouseListener = new MyMouseListener();
         myMouseListener.addObserver(this);
         window.addMouseListener(myMouseListener);
-        window.drawBoard(model);
     }
 
 
@@ -30,9 +29,13 @@ public class View  extends Observable  implements Observer
         if(o!=null) // when o!=null, then mouseclick set it
         {
             setChanged();
-            notifyObservers(o);
+            notifyObservers(new DataObject("View", (int)o));
         }
         else //model doesn't set o
             window.drawBoard(model);
+    }
+    public void updateBoard()
+    {
+        window.drawBoard(model);
     }
 }
