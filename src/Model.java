@@ -27,9 +27,10 @@ public class Model extends Observable
             if(field[c][i]==0)
             {
                 field[c][i]=player;
-                checkWin();
+                setCurrentPlayer((getCurrentPlayer() % 2) + 1) ;
                 setChanged();
                 notifyObservers();
+                checkWin();
                 return true;
             }
         return false;

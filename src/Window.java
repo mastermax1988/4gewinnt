@@ -37,7 +37,7 @@ public class Window extends Canvas
             }
         graphics.setFont(new Font("Times",10,24));
         System.out.println(model.getCurrentPlayer());
-        int currentPlayer = (model.getCurrentPlayer() % 2) + 1;
+        int currentPlayer = model.getCurrentPlayer();
         graphics.setColor(currentPlayer== 1 ? Color.yellow : Color.red);
         if(model.getWinner()>0)
         {

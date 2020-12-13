@@ -18,8 +18,7 @@ public class Controller implements Observer
             {
                 System.exit(0);
             }
-            if (model.addDisk(ob.value, model.getCurrentPlayer()))
-                model.setCurrentPlayer((model.getCurrentPlayer() % 2) + 1);
+            model.addDisk(ob.value, model.getCurrentPlayer());
             System.out.println("Controller set player to " + model.getCurrentPlayer());
         }
         else if(ob.from.equals("Model"))
