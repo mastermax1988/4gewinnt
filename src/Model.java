@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 public class Model extends Observable
@@ -12,6 +14,20 @@ public class Model extends Observable
         iWinner = -1;
         setChanged();
         notifyObservers();
+    }
+    public List<Integer> getFreeCols()
+    {
+        List<Integer> ret = new ArrayList<Integer>();
+        for(int i=0;i<iCols;i++)
+        {
+            if (field[i][iRows - 1] == 0)
+                ret.add(i);
+        }
+        return ret;
+    }
+    public boolean boardFull()
+    {
+        return getFreeCols().size()==0;
     }
     public boolean colFree(int c)
     {

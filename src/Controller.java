@@ -1,10 +1,12 @@
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 public class Controller implements Observer
 {
     private final View view;
     private final Model model;
+    Random random;
     @Override
     public void update(Observable observable, Object o)
     {
@@ -13,13 +15,17 @@ public class Controller implements Observer
         DataObject ob = (DataObject) o;
         if(ob.from.equals("View"))
         {
-            System.out.println("Controller from view" + ob);
-            if(model.getWinner()>0)
+            if(model.getWinner()>0 || model.boardFull())
             {
                 System.exit(0);
             }
             model.addDisk(ob.value, model.getCurrentPlayer());
-            System.out.println("Controller set player to " + model.getCurrentPlayer());
+            if(model.getCurrentPlayer()==2 && !model.boardFull())
+            {
+                var free=model.getFreeCols();
+                model.addDisk(free.get(random.nextInt(free.size())),2);
+            }
+
         }
         else if(ob.from.equals("Model"))
         {
@@ -29,6 +35,7 @@ public class Controller implements Observer
     }
     public Controller(Model m, View v)
     {
+        random = new Random();
         view = v;
         view.addObserver(this);
         model = m;

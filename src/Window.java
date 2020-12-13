@@ -14,6 +14,7 @@ public class Window extends Canvas
         model = m;
         paint(getGraphics());
     }
+
     @Override
     public void paint(Graphics graphics)
     {
@@ -43,6 +44,11 @@ public class Window extends Canvas
         {
            graphics.setColor(model.getWinner() == 1 ? Color.yellow : Color.red);
            graphics.drawString("Player " + model.getWinner() + " won!", 50, 40);
+        }
+        else if(model.boardFull())
+        {
+           graphics.setColor(Color.green);
+           graphics.drawString("It's a tie, nobody won!", 50, 40);
         }
         else
            graphics.drawString("Player " + currentPlayer + ", it's your turn!",50,40);
