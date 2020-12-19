@@ -7,6 +7,7 @@ public class Controller implements Observer
     private final View view;
     private final Model model;
     Random random;
+    private KI ki;
     @Override
     public void update(Observable observable, Object o)
     {
@@ -22,8 +23,7 @@ public class Controller implements Observer
             model.addDisk(ob.value, model.getCurrentPlayer());
             if(model.getCurrentPlayer()==2 && !model.boardFull())
             {
-                var free=model.getFreeCols();
-                model.addDisk(free.get(random.nextInt(free.size())),2);
+                model.addDisk(ki.getBestMove(model),2);
             }
 
         }
@@ -42,5 +42,6 @@ public class Controller implements Observer
         m.addObserver(this);
         model.setCurrentPlayer(1);
         view.updateBoard();
+        ki = new KI();
     }
 }

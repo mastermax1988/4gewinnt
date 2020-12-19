@@ -15,6 +15,17 @@ public class Model extends Observable
         setChanged();
         notifyObservers();
     }
+    public Model(Model m) // Constructor for cloning the model
+    {
+        //--- cloning 2 dim array
+        this.field = m.field.clone();
+        for(int i=0;i<this.field.length;i++)
+            this.field[i] = m.field[i].clone();
+        //cloning done
+
+        this.iWinner = m.iWinner;
+        this.currentPlayer = m.currentPlayer;
+    }
     public List<Integer> getFreeCols()
     {
         List<Integer> ret = new ArrayList<Integer>();
@@ -64,6 +75,7 @@ public class Model extends Observable
                 {
                     if (f == field[i + 1][j] && f == field[i + 2][j] && f == field[i + 3][j])
                     {
+                        iWinner = f;
                         setChanged();
                         notifyObservers(new DataObject("Model",f));
                         return;
@@ -73,6 +85,7 @@ public class Model extends Observable
                 {
                    if (f == field[i][j+1] && f == field[i][j+2] && f == field[i][j+3])
                     {
+                        iWinner = f;
                         setChanged();
                         notifyObservers(new DataObject("Model",f));
                         return;
@@ -82,6 +95,7 @@ public class Model extends Observable
                 {
                    if (f == field[i+1][j+1] && f == field[i+2][j+2] && f == field[i+3][j+3])
                     {
+                        iWinner = f;
                         setChanged();
                         notifyObservers(new DataObject("Model",f));
                         return;
@@ -91,6 +105,7 @@ public class Model extends Observable
                 {
                    if (f == field[i+1][j-1] && f == field[i+2][j-2] && f == field[i+3][j-3])
                     {
+                        iWinner = f;
                         setChanged();
                         notifyObservers(new DataObject("Model",f));
                         return;
