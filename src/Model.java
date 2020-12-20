@@ -140,4 +140,16 @@ public class Model extends Observable
     {
         this.currentPlayer = currentPlayer;
     }
+    @Override
+    public String toString()
+    {
+        String s = "";
+        for(int i=iRows-1;i>=0;i--)
+        {
+            for (int j = 0; j < iCols; j++)
+                s += field[j][i];
+            s += "\n";
+        }
+        return s;
+    }
 }

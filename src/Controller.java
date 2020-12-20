@@ -21,7 +21,7 @@ public class Controller implements Observer
                 System.exit(0);
             }
             model.addDisk(ob.value, model.getCurrentPlayer());
-            if(model.getCurrentPlayer()==2 && !model.boardFull())
+            if(model.getCurrentPlayer()==2 && !model.boardFull() && model.getWinner()==-1)
             {
                 model.addDisk(ki.getBestMove(model),2);
             }
