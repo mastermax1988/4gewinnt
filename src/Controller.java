@@ -24,6 +24,7 @@ public class Controller implements Observer
             if(model.getCurrentPlayer()==2 && !model.boardFull() && model.getWinner()==-1)
             {
                 model.addDisk(ki.getBestMove(model),2);
+                System.out.println("Suggested move: " + ki.getBestMove(model));
             }
 
         }
