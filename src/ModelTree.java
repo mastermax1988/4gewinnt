@@ -62,9 +62,9 @@ public class ModelTree
     {
         int score = 0;
         if(root.getWinner()==kiPlayer)
-            score = (r1-r2 == 0) ? 1000 : 1;
+            score = 11-r1+r2;
         else if(root.getWinner()!=-1) // enemy won
-            score = (r1-r2 < 2) ? -100 : -30;
+            score = -10+r1-r2;
         for(var n : nodes)
             score += n.getScore(r1, r2-1);
         if(score!=0)
