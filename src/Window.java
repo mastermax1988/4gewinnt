@@ -1,6 +1,7 @@
+import javax.swing.*;
 import java.awt.*;
 
-public class Window extends Canvas
+public class Window extends JPanel
 {
     private Model model;
     public Window()
@@ -12,13 +13,13 @@ public class Window extends Canvas
     public void drawBoard(Model m)
     {
         model = m;
-        paint(getGraphics());
+        repaint();
     }
 
     @Override
-    public void paint(Graphics graphics)
+    public void paintComponent(Graphics graphics)
     {
-        super.paint(graphics);
+        super.paintComponent(graphics);
         for(int i = 0; i< model.iCols; i++)
             for(int j = 0; j< model.iRows; j++)
             {
@@ -35,6 +36,8 @@ public class Window extends Canvas
                         graphics.setColor(Color.darkGray);
                 }
                 graphics.fillOval(i * 100 + 50, 500 - j * 100 + 50, 100,  100);
+                graphics.setColor(Color.black);
+                graphics.drawOval(i * 100 + 50, 500 - j * 100 + 50, 100,  100);
             }
         graphics.setFont(new Font("Times",10,24));
         int currentPlayer = model.getCurrentPlayer();
